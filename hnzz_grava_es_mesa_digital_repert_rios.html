@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HNZZ Gravações - Mesa Digital & Repertórios</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts: Montserrat & Rajdhani -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandRed: '#E50914',
+            brandRedHover: '#B20710',
+            darkBg: '#0D0D0D',
+            cardBg: '#171717',
+            panelBg: '#1E1E1E',
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            display: ['Rajdhani', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0d0d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #e50914;
+      border-radius: 4px;
+    }
+
+    /* Custom Fader / Slider Styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: transparent;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    /* Horizontal Slider */
+    .slider-horiz::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      background: #2a2a2a;
+      border-radius: 4px;
+      border: 1px solid #333;
+    }
+    .slider-horiz::-webkit-slider-thumb {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #e50914;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -6px;
+      box-shadow: 0 0 10px rgba(229, 9, 20, 0.7);
+      transition: transform 0.1s ease;
+    }
+    .slider-horiz::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Vertical Fader */
+    .slider-vert-container {
+      position: relative;
+      height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slider-vert {
+      -webkit-appearance: none;
+      width: 160px;
+      height: 8px;
+      transform: rotate(-90deg);
+      background: #2a2a2a;
+      border-radius: 4px;
+      border: 1px solid #3f3f3f;
+    }
+    .slider-vert::-webkit-slider-thumb {
+      height: 24px;
+      width: 14px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #ffffff 0%, #a1a1a1 50%, #444 100%);
+      border: 1px solid #000;
+      cursor: pointer;
+      -webkit-appearance: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    }
+
+    /* Glow Effects */
+    .glow-red {
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.35);
+    }
+    .glow-red-text {
+      text-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+    }
+  </style>
+</head>
+<body class="bg-darkBg text-white font-sans min-h-screen flex flex-col justify-between selection:bg-brandRed selection:text-white">
+
+  <!-- HEADER -->
+  <header class="bg-black/90 border-b border-brandRed/30 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <!-- Logo Container -->
+      <div class="flex items-center gap-3">
+        <img src="Logo.jpg" alt="HNZZ Gravações" class="h-12 w-auto object-contain border border-brandRed/40 rounded-lg p-0.5 bg-black" onerror="this.onerror=null; this.src='https://placehold.co/150x60/000000/E50914?text=HNZZ+GRAVA%C3%87%C3%95ES'">
+        <span class="text-xl font-black font-display tracking-wider hidden sm:block">
+          HNZZ <span class="text-brandRed">GRAVAÇÕES</span>
+        </span>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-4">
+        <a href="https://instagram.com/hnzz.gravacoes" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-xs sm:text-sm bg-neutral-900 hover:bg-neutral-800 text-gray-300 hover:text-white px-3 py-2 rounded-lg border border-neutral-700 transition">
+          <i data-lucide="instagram" class="w-4 h-4 text-brandRed"></i>
+          <span class="hidden sm:inline">@hnzz.gravacoes</span>
+        </a>
+        <a href="#repertorios" class="bg-brandRed hover:bg-brandRedHover text-white font-extrabold text-xs sm:text-sm px-4 py-2.5 rounded-lg shadow-lg shadow-brandRed/30 transition transform hover:-translate-y-0.5">
+          COMPRAR REPERTÓRIO
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-12">
+
+    <!-- HERO / TITLE -->
+    <section class="text-center space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-black font-display tracking-tight uppercase">
+        Mesa Digital <span class="text-brandRed glow-red-text">HNZZ</span>
+      </h1>
+      <p class="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
+        Carregue suas músicas baixadas, teste a equalização em tempo real com grave pesado e garanta os melhores repertórios atualizados!
+      </p>
+    </section>
+
+    <!-- MESA DIGITAL CONTAINER -->
+    <section class="bg-cardBg border-2 border-brandRed/40 rounded-2xl p-4 sm:p-6 shadow-2xl relative overflow-hidden">
+      <!-- Background subtle grid pattern -->
+      <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#e50914_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+      <!-- TOP CONTROL BAR (Carregar Música & Status) -->
+      <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-6 bg-panelBg p-4 rounded-xl border border-neutral-800">
+        <!-- Load Audio Button -->
+        <div class="flex flex-col sm:flex-row items-center gap-3">
+          <label for="audio-file-input" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-brandRed hover:bg-brandRedHover text-white px-5 py-3 rounded-xl cursor-pointer font-bold transition shadow-md hover:shadow-brandRed/40">
+            <i data-lucide="upload"></i>
+            <span>ABRIR MÚSICA</span>
+          </label>
+          <input type="file" id="audio-file-input" accept="audio/*" class="hidden">
+          <div class="text-xs text-gray-400 text-center sm:text-left truncate max-w-[200px]" id="file-name-display">
+            Nenhum arquivo carregado
+          </div>
+        </div>
+
+        <!-- Audio Transport Controls -->
+        <div class="flex items-center justify-center gap-4">
+          <button id="btn-play" class="p-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-full transition disabled:opacity-40" disabled>
+            <i data-lucide="play" class="w-6 h-6 fill-current"></i>
+          </button>
+          <button id="btn-pause" class="p-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-full transition disabled:opacity-40" disabled>
+            <i data-lucide="pause" class="w-6 h-6 fill-current"></i>
+          </button>
+          <button id="btn-stop" class="p-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-full transition disabled:opacity-40" disabled>
+            <i data-lucide="square" class="w-6 h-6 fill-current"></i>
+          </button>
+        </div>
+
+        <!-- Status Display -->
+        <div class="flex items-center justify-end">
+          <div class="bg-black/60 px-4 py-2 rounded-lg border border-neutral-800 text-right w-full md:w-auto flex items-center justify-between md:justify-end gap-3">
+            <span class="text-xs text-gray-400 font-mono">STATUS:</span>
+            <span id="player-status" class="text-xs font-bold text-yellow-500 uppercase tracking-wider font-mono">Aguardando Áudio</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRESETS DE EQUALIZAÇÃO -->
+      <div class="relative z-10 mb-8 bg-neutral-900/90 p-4 rounded-xl border border-neutral-800">
+        <div class="flex items-center gap-2 mb-3">
+          <i data-lucide="sliders" class="w-4 h-4 text-brandRed"></i>
+          <span class="text-xs font-extrabold uppercase tracking-widest text-gray-300">Presets de Equalização</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button id="preset-flat" class="preset-btn flex-1 min-w-[120px] bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-bold py-2.5 px-3 rounded-lg transition active:scale-95 text-center">
+            FLAT / NORMAL
+          </button>
+          <button id="preset-super-grave" class="preset-btn flex-1 min-w-[120px] bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-bold py-2.5 px-3 rounded-lg transition active:scale-95 text-center text-brandRed">
+            🔥 SUPER GRAVE
+          </button>
+          <button id="preset-medio-grave" class="preset-btn flex-1 min-w-[120px] bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-bold py-2.5 px-3 rounded-lg transition active:scale-95 text-center text-amber-400">
+            🔊 MÉDIO GRAVE
+          </button>
+          <button id="preset-voz-cornetas" class="preset-btn flex-1 min-w-[120px] bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-xs font-bold py-2.5 px-3 rounded-lg transition active:scale-95 text-center text-cyan-400">
+            📣 VOZ & CORNETAS
+          </button>
+        </div>
+      </div>
+
+      <!-- MESA DE SOM - BANDS & FADERS -->
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- EQ KNOBS & KNOB CONTROLS (Columns 1 to 9) -->
+        <div class="lg:col-span-9 bg-neutral-900/80 p-5 rounded-xl border border-neutral-800 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          
+          <!-- BAND 1: GRAVE -->
+          <div class="bg-panelBg p-4 rounded-xl border border-neutral-800/80 flex flex-col items-center justify-between text-center space-y-3">
+            <span class="text-xs font-black uppercase text-brandRed tracking-wider">GRAVE</span>
+            <span class="text-[10px] text-gray-500 font-mono">(60 Hz - Sub)</span>
+            
+            <div class="slider-vert-container">
+              <input type="range" id="eq-grave" min="-12" max="12" value="0" step="0.5" class="slider-vert">
+            </div>
+
+            <div class="bg-black/80 px-3 py-1 rounded border border-neutral-800 w-full">
+              <span id="val-grave" class="text-xs font-mono font-bold text-gray-200">0 dB</span>
+            </div>
+          </div>
+
+          <!-- BAND 2: MÉDIO GRAVE -->
+          <div class="bg-panelBg p-4 rounded-xl border border-neutral-800/80 flex flex-col items-center justify-between text-center space-y-3">
+            <span class="text-xs font-black uppercase text-amber-500 tracking-wider">MÉDIO GRAVE</span>
+            <span class="text-[10px] text-gray-500 font-mono">(250 Hz - Pancada)</span>
+
+            <div class="slider-vert-container">
+              <input type="range" id="eq-medio-grave" min="-12" max="12" value="0" step="0.5" class="slider-vert">
+            </div>
+
+            <div class="bg-black/80 px-3 py-1 rounded border border-neutral-800 w-full">
+              <span id="val-medio-grave" class="text-xs font-mono font-bold text-gray-200">0 dB</span>
+            </div>
+          </div>
+
+          <!-- BAND 3: CORNETA -->
+          <div class="bg-panelBg p-4 rounded-xl border border-neutral-800/80 flex flex-col items-center justify-between text-center space-y-3">
+            <span class="text-xs font-black uppercase text-yellow-400 tracking-wider">CORNETA</span>
+            <span class="text-[10px] text-gray-500 font-mono">(2.5 kHz - Voz)</span>
+
+            <div class="slider-vert-container">
+              <input type="range" id="eq-corneta" min="-12" max="12" value="0" step="0.5" class="slider-vert">
+            </div>
+
+            <div class="bg-black/80 px-3 py-1 rounded border border-neutral-800 w-full">
+              <span id="val-corneta" class="text-xs font-mono font-bold text-gray-200">0 dB</span>
+            </div>
+          </div>
+
+          <!-- BAND 4: AGUDO -->
+          <div class="bg-panelBg p-4 rounded-xl border border-neutral-800/80 flex flex-col items-center justify-between text-center space-y-3">
+            <span class="text-xs font-black uppercase text-cyan-400 tracking-wider">AGUDO</span>
+            <span class="text-[10px] text-gray-500 font-mono">(10 kHz - Tweeter)</span>
+
+            <div class="slider-vert-container">
+              <input type="range" id="eq-agudo" min="-12" max="12" value="0" step="0.5" class="slider-vert">
+            </div>
+
+            <div class="bg-black/80 px-3 py-1 rounded border border-neutral-800 w-full">
+              <span id="val-agudo" class="text-xs font-mono font-bold text-gray-200">0 dB</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- MASTER VOLUME & LED SIGNAL METER (Columns 10 to 12) -->
+        <div class="lg:col-span-3 bg-neutral-900/80 p-5 rounded-xl border border-neutral-800 flex flex-col justify-between">
+          
+          <div class="text-center mb-2">
+            <span class="text-xs font-black uppercase text-white tracking-widest">MASTER VOLUME</span>
+            <p class="text-[10px] text-gray-400">Régua de Saída Principal</p>
+          </div>
+
+          <!-- Fader + VU Meter Grid -->
+          <div class="flex items-center justify-center gap-6 my-2">
+            
+            <!-- Régua do Volume Master (Fader) -->
+            <div class="flex flex-col items-center space-y-2">
+              <span class="text-[10px] font-mono text-gray-400">100%</span>
+              <div class="slider-vert-container">
+                <input type="range" id="master-volume" min="0" max="1" value="0.8" step="0.01" class="slider-vert">
+              </div>
+              <span class="text-[10px] font-mono text-gray-400">0%</span>
+            </div>
+
+            <!-- LED SIGNAL METER (Régua de Luz) -->
+            <div class="flex flex-col items-center">
+              <span class="text-[10px] font-mono text-gray-400 mb-1">SINAL</span>
+              
+              <div class="w-8 bg-black p-1.5 rounded-lg border border-neutral-800 flex flex-col gap-1 items-center h-[180px] justify-between" id="vu-meter">
+                <!-- 10 LED segments (Top to Bottom) -->
+                <!-- Red / Clip (Overdrive) -->
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="10" data-color="bg-red-600"></div>
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="9" data-color="bg-red-500"></div>
+                <!-- Yellow / High Signal -->
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="8" data-color="bg-yellow-400"></div>
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="7" data-color="bg-yellow-400"></div>
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="6" data-color="bg-yellow-500"></div>
+                <!-- Green / Normal Signal -->
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="5" data-color="bg-green-500"></div>
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="4" data-color="bg-green-500"></div>
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="3" data-color="bg-green-500"></div>
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="2" data-color="bg-green-600"></div>
+                <div class="led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75" data-level="1" data-color="bg-green-600"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Digital Display Value -->
+          <div class="bg-black/90 p-2 rounded-lg border border-neutral-800 text-center">
+            <span id="val-volume" class="text-sm font-mono font-bold text-brandRed">80%</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO REPERTÓRIOS -->
+    <section id="repertorios" class="space-y-6 pt-6">
+      <div class="text-center space-y-2">
+        <h2 class="text-2xl sm:text-4xl font-black font-display uppercase tracking-tight">
+          PACOTES DE <span class="text-brandRed">REPERTÓRIO</span>
+        </h2>
+        <p class="text-gray-400 text-sm max-w-xl mx-auto">
+          Adquira os melhores repertórios selecionados e atualizados pela HNZZ Gravações para tocar no seu som.
+        </p>
+      </div>
+
+      <!-- CARDS DE PACOTES -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+
+        <!-- PACOTE 8GB -->
+        <div class="bg-cardBg border-2 border-brandRed/50 hover:border-brandRed rounded-2xl p-6 flex flex-col justify-between transition-all transform hover:-translate-y-1 shadow-xl relative overflow-hidden group">
+          <div class="absolute -right-8 -top-8 w-24 h-24 bg-brandRed/10 rounded-full blur-xl group-hover:bg-brandRed/20 transition"></div>
+          
+          <div>
+            <div class="flex justify-between items-start mb-4">
+              <div>
+                <span class="bg-brandRed/20 text-brandRed text-xs font-bold px-2.5 py-1 rounded-md border border-brandRed/30">
+                  MAIS POPULAR
+                </span>
+                <h3 class="text-2xl font-black font-display mt-2">REPERTÓRIO 8GB</h3>
+              </div>
+              <i data-lucide="disc" class="w-8 h-8 text-brandRed"></i>
+            </div>
+
+            <p class="text-gray-400 text-xs mb-6">
+              Seleção completa com os maiores sucessos, atualizados semanalmente no ponto para paredões e som automotivo.
+            </p>
+
+            <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brandRed"></i>
+                <span>Músicas em Alta Qualidade (320kbps)</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brandRed"></i>
+                <span>Organizados por Pastas e Estilos</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-brandRed"></i>
+                <span>Download Imediato após confirmação</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="flex items-baseline gap-1 mb-4">
+              <span class="text-3xl font-black text-white">R$ 15,00</span>
+              <span class="text-xs text-gray-500">/ acesso vitalício</span>
+            </div>
+
+            <button id="btn-buy-8gb" class="w-full bg-brandRed hover:bg-brandRedHover text-white font-extrabold py-3 rounded-xl shadow-lg shadow-brandRed/30 transition flex items-center justify-center gap-2">
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              <span>COMPRAR REPERTÓRIO (8GB)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- PACOTE 16GB (EM BREVE) -->
+        <div class="bg-cardBg/60 border border-neutral-800 rounded-2xl p-6 flex flex-col justify-between opacity-85 relative overflow-hidden">
+          <div class="absolute top-4 right-4">
+            <span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[11px] font-black tracking-widest px-3 py-1 rounded-full uppercase">
+              EM BREVE
+            </span>
+          </div>
+
+          <div>
+            <div class="mb-4">
+              <span class="bg-neutral-800 text-gray-400 text-xs font-bold px-2.5 py-1 rounded-md">
+                MEGA PACOTE
+              </span>
+              <h3 class="text-2xl font-black font-display text-gray-300 mt-2">REPERTÓRIO 16GB</h3>
+            </div>
+
+            <p class="text-gray-400 text-xs mb-6">
+              Acervo estendido com vinhetas exclusivas, regravações de áudio e conteúdo raro em fase final de organização.
+            </p>
+
+            <ul class="space-y-2.5 text-xs text-gray-400 mb-6">
+              <li class="flex items-center gap-2">
+                <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
+                <span>Acervo duplo de Músicas</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
+                <span>Vinhetas exclusivas inclusas</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="clock" class="w-4 h-4 text-amber-400"></i>
+                <span>Lançamento em breve</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="flex items-baseline gap-1 mb-4">
+              <span class="text-3xl font-black text-gray-400">R$ 20,00</span>
+            </div>
+
+            <button disabled class="w-full bg-neutral-800 text-gray-500 font-bold py-3 rounded-xl cursor-not-allowed border border-neutral-700 flex items-center justify-center gap-2">
+              <i data-lucide="lock" class="w-4 h-4"></i>
+              <span>EM BREVE</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE COMPRA PARA O PLANO DE 8GB -->
+  <div id="buy-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-cardBg border-2 border-brandRed rounded-2xl max-w-md w-full p-6 shadow-2xl relative animate-fade-in">
+      <button id="btn-close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="text-center space-y-3 mb-6">
+        <div class="w-12 h-12 bg-brandRed/20 text-brandRed rounded-full flex items-center justify-center mx-auto border border-brandRed/40">
+          <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-xl font-black font-display uppercase">Comprar Repertório 8GB</h3>
+        <p class="text-xs text-gray-400">
+          O link de checkout ou WhatsApp pode ser inserido no código do botão abaixo.
+        </p>
+      </div>
+
+      <div class="bg-black/50 p-4 rounded-xl border border-neutral-800 mb-6 space-y-2">
+        <div class="flex justify-between text-xs">
+          <span class="text-gray-400">Item:</span>
+          <span class="font-bold">Pacote Repertório 8GB</span>
+        </div>
+        <div class="flex justify-between text-xs">
+          <span class="text-gray-400">Valor:</span>
+          <span class="font-bold text-brandRed">R$ 15,00</span>
+        </div>
+      </div>
+
+      <!-- BOTÃO DE DIRECIONAMENTO AO LINK -->
+      <a id="modal-checkout-link" href="https://wa.link/nijici" target="_blank" class="w-full bg-brandRed hover:bg-brandRedHover text-white font-extrabold py-3.5 rounded-xl shadow-lg shadow-brandRed/30 transition flex items-center justify-center gap-2 text-sm">
+        <span>IR PARA O PAGAMENTO</span>
+        <i data-lucide="external-link" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-t border-neutral-800 py-6 mt-12">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+      <p class="text-xs text-gray-500">
+        &copy; 2026 <span class="text-white font-bold">HNZZ GRAVAÇÕES</span>. Todos os direitos reservados.
+      </p>
+      <div class="flex justify-center items-center gap-2 text-xs text-gray-400">
+        <i data-lucide="instagram" class="w-4 h-4 text-brandRed"></i>
+        <a href="https://instagram.com/hnzz.gravacoes" target="_blank" class="hover:underline">@hnzz.gravacoes</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AUDIO ENGINE & INTERACTION LOGIC -->
+  <script>
+    // Inicialização dos Ícones Lucide
+    lucide.createIcons();
+
+    // Link do botão de comprar 8GB
+    let linkCompra8GB = "https://wa.link/nijici";
+
+    // Web Audio API Context & Nodes
+    let audioCtx;
+    let audioElement = new Audio();
+    let sourceNode;
+    let gainNode;
+    let analyserNode;
+    let isAudioLoaded = false;
+
+    // Filters for EQ
+    let filterGrave;      // Lowshelf ~60Hz
+    let filterMedioGrave; // Peaking ~250Hz
+    let filterCorneta;    // Peaking ~2500Hz
+    let filterAgudo;      // Highshelf ~10000Hz
+
+    // DOM Elements
+    const audioFileInput = document.getElementById('audio-file-input');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    const playerStatus = document.getElementById('player-status');
+
+    const btnPlay = document.getElementById('btn-play');
+    const btnPause = document.getElementById('btn-pause');
+    const btnStop = document.getElementById('btn-stop');
+
+    const inputGrave = document.getElementById('eq-grave');
+    const inputMedioGrave = document.getElementById('eq-medio-grave');
+    const inputCorneta = document.getElementById('eq-corneta');
+    const inputAgudo = document.getElementById('eq-agudo');
+    const inputVolume = document.getElementById('master-volume');
+
+    const valGrave = document.getElementById('val-grave');
+    const valMedioGrave = document.getElementById('val-medio-grave');
+    const valCorneta = document.getElementById('val-corneta');
+    const valAgudo = document.getElementById('val-agudo');
+    const valVolume = document.getElementById('val-volume');
+
+    const signalText = document.getElementById('signal-text');
+    const ledBars = Array.from(document.querySelectorAll('.led-bar'));
+
+    // Setup Web Audio Context
+    function initAudioContext() {
+      if (audioCtx) return;
+
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+
+      // Audio Source
+      sourceNode = audioCtx.createMediaElementSource(audioElement);
+
+      // Filters Configuration
+      filterGrave = audioCtx.createBiquadFilter();
+      filterGrave.type = 'lowshelf';
+      filterGrave.frequency.value = 60;
+
+      filterMedioGrave = audioCtx.createBiquadFilter();
+      filterMedioGrave.type = 'peaking';
+      filterMedioGrave.frequency.value = 250;
+      filterMedioGrave.Q.value = 1.0;
+
+      filterCorneta = audioCtx.createBiquadFilter();
+      filterCorneta.type = 'peaking';
+      filterCorneta.frequency.value = 2500;
+      filterCorneta.Q.value = 1.0;
+
+      filterAgudo = audioCtx.createBiquadFilter();
+      filterAgudo.type = 'highshelf';
+      filterAgudo.frequency.value = 10000;
+
+      // Gain (Master Volume)
+      gainNode = audioCtx.createGain();
+      gainNode.gain.value = parseFloat(inputVolume.value);
+
+      // Analyser (for VU Meter)
+      analyserNode = audioCtx.createAnalyser();
+      analyserNode.fftSize = 64;
+
+      // Connect Nodes in Chain:
+      // Source -> Grave -> MedioGrave -> Corneta -> Agudo -> Gain -> Analyser -> Destination
+      sourceNode.connect(filterGrave);
+      filterGrave.connect(filterMedioGrave);
+      filterMedioGrave.connect(filterCorneta);
+      filterCorneta.connect(filterAgudo);
+      filterAgudo.connect(gainNode);
+      gainNode.connect(analyserNode);
+      analyserNode.connect(audioCtx.destination);
+
+      updateVUDisplay();
+    }
+
+    // Load Local File
+    audioFileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      initAudioContext();
+
+      const objectUrl = URL.createObjectURL(file);
+      audioElement.src = objectUrl;
+      fileNameDisplay.textContent = file.name;
+      
+      isAudioLoaded = true;
+      btnPlay.disabled = false;
+      btnPause.disabled = false;
+      btnStop.disabled = false;
+
+      playerStatus.textContent = "Pronto para Tocar";
+      playerStatus.className = "text-xs font-bold text-green-400 uppercase tracking-wider font-mono";
+
+      // Auto play on load
+      playAudio();
+    });
+
+    function playAudio() {
+      if (!isAudioLoaded) return;
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      audioElement.play();
+      playerStatus.textContent = "Tocando...";
+      playerStatus.className = "text-xs font-bold text-green-500 uppercase tracking-wider font-mono glow-red-text";
+    }
+
+    function pauseAudio() {
+      if (!isAudioLoaded) return;
+      audioElement.pause();
+      playerStatus.textContent = "Pausado";
+      playerStatus.className = "text-xs font-bold text-yellow-400 uppercase tracking-wider font-mono";
+    }
+
+    function stopAudio() {
+      if (!isAudioLoaded) return;
+      audioElement.pause();
+      audioElement.currentTime = 0;
+      playerStatus.textContent = "Parado";
+      playerStatus.className = "text-xs font-bold text-gray-400 uppercase tracking-wider font-mono";
+    }
+
+    btnPlay.addEventListener('click', playAudio);
+    btnPause.addEventListener('click', pauseAudio);
+    btnStop.addEventListener('click', stopAudio);
+
+    // Update Band Filters
+    inputGrave.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      valGrave.textContent = (val > 0 ? '+' : '') + val + ' dB';
+      if (filterGrave) filterGrave.gain.value = val;
+    });
+
+    inputMedioGrave.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      valMedioGrave.textContent = (val > 0 ? '+' : '') + val + ' dB';
+      if (filterMedioGrave) filterMedioGrave.gain.value = val;
+    });
+
+    inputCorneta.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      valCorneta.textContent = (val > 0 ? '+' : '') + val + ' dB';
+      if (filterCorneta) filterCorneta.gain.value = val;
+    });
+
+    inputAgudo.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      valAgudo.textContent = (val > 0 ? '+' : '') + val + ' dB';
+      if (filterAgudo) filterAgudo.gain.value = val;
+    });
+
+    inputVolume.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value);
+      const percentage = Math.round(val * 100);
+      valVolume.textContent = percentage + '%';
+      if (gainNode) gainNode.gain.value = val;
+    });
+
+    // PRESETS FUNCTIONALITY
+    function setEQValues(g, mg, c, a) {
+      inputGrave.value = g;
+      inputMedioGrave.value = mg;
+      inputCorneta.value = c;
+      inputAgudo.value = a;
+
+      inputGrave.dispatchEvent(new Event('input'));
+      inputMedioGrave.dispatchEvent(new Event('input'));
+      inputCorneta.dispatchEvent(new Event('input'));
+      inputAgudo.dispatchEvent(new Event('input'));
+    }
+
+    document.getElementById('preset-flat').addEventListener('click', () => setEQValues(0, 0, 0, 0));
+    document.getElementById('preset-super-grave').addEventListener('click', () => setEQValues(10, 4, 1, -2));
+    document.getElementById('preset-medio-grave').addEventListener('click', () => setEQValues(4, 9, 2, 0));
+    document.getElementById('preset-voz-cornetas').addEventListener('click', () => setEQValues(-2, 1, 8, 6));
+
+    // VU METER SIGNAL LOOP
+    function updateVUDisplay() {
+      requestAnimationFrame(updateVUDisplay);
+
+      if (!analyserNode || audioElement.paused) {
+        // Reset LEDs when paused or no signal
+        ledBars.forEach(bar => bar.className = 'led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75');
+        return;
+      }
+
+      const bufferLength = analyserNode.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyserNode.getByteFrequencyData(dataArray);
+
+      // Average signal level calculation
+      let sum = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        sum += dataArray[i];
+      }
+      let average = sum / bufferLength; // 0 to 255
+      
+      // Calculate normalized level from 0 to 10
+      let level = Math.round((average / 180) * 10);
+      if (level > 10) level = 10;
+
+      // Update LEDs according to volume level
+      ledBars.forEach(bar => {
+        const barLevel = parseInt(bar.getAttribute('data-level'));
+        const activeColor = bar.getAttribute('data-color');
+
+        if (barLevel <= level) {
+          bar.className = `led-bar w-full h-3 rounded-sm ${activeColor} shadow-sm transition-colors duration-75`;
+        } else {
+          bar.className = 'led-bar w-full h-3 rounded-sm bg-neutral-800 transition-colors duration-75';
+        }
+      });
+    }
+
+    // MODAL LOGIC FOR 8GB PURCHASES
+    const modal = document.getElementById('buy-modal');
+    const btnBuy8gb = document.getElementById('btn-buy-8gb');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const modalCheckoutLink = document.getElementById('modal-checkout-link');
+
+    btnBuy8gb.addEventListener('click', () => {
+      modalCheckoutLink.href = linkCompra8GB;
+      modal.classList.remove('hidden');
+    });
+
+    btnCloseModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
